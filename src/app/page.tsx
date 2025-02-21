@@ -1,101 +1,172 @@
+'use client';
+import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import Header from "@/components/header";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, ease: "easeOut" },
+  };
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const staggerContainer = {
+    animate: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const variants = {
+    left: {
+      initial: { opacity: 0, x: -100 },
+      whileInView: { opacity: 1, x: 0 },
+      transition: { duration: 0.8, ease: "easeOut" },
+      viewport: { once: true },
+    },
+    right: {
+      initial: { opacity: 0, x: 100 },
+      whileInView: { opacity: 1, x: 0 },
+      transition: { duration: 0.8, ease: "easeOut" },
+      viewport: { once: true },
+    },
+    bottom: {
+      initial: { opacity: 0, y: 100 },
+      whileInView: { opacity: 1, y: 0 },
+      transition: { duration: 0.8, ease: "easeOut" },
+      viewport: { once: true },
+    },
+    top: {
+      initial: { opacity: 0, y: -100 },
+      whileInView: { opacity: 1, y: 0 },
+      transition: { duration: 0.8, ease: "easeOut" },
+      viewport: { once: true },
+    },
+  };
+
+  const imageAnimation = {
+    initial: { scale: 0.8, opacity: 0 },
+    whileInView: { scale: 1, opacity: 1 },
+    transition: { duration: 0.6, ease: "easeOut" },
+    viewport: { once: true },
+  };
+
+  return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-black/20 z-10" />
+          <Image
+              src="https://bucketforshop.s3.eu-north-1.amazonaws.com/home-page1.svg"
+              alt="Hero background"
+              fill
+              className="object-cover"
+              priority
+          />
+          <motion.div
+              className="relative z-20 text-center text-white"
+              variants={staggerContainer}
+              initial="initial"
+              animate="animate"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Edit deploy
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <motion.h1
+                className="text-5xl md:text-6xl font-bold mb-4"
+                variants={fadeInUp}
+            >
+              Ласкаво просимо до нашого магазину
+            </motion.h1>
+            <motion.p
+                className="text-xl md:text-2xl mb-8"
+                variants={fadeInUp}
+            >
+              Дізнайтесь більше про нас
+            </motion.p>
+            <motion.div variants={fadeInUp}>
+              <Link
+                  href="/about"
+                  className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+              >
+                Детальніше
+              </Link>
+            </motion.div>
+          </motion.div>
+        </section>
+
+        <section className="py-16 px-4 md:px-8">
+          <div className="max-w-7xl mx-auto space-y-16">
+            <motion.div
+                className="flex flex-col md:flex-row items-center gap-8"
+                {...variants.left}
+            >
+              <motion.div className="w-full md:w-1/2" {...imageAnimation}>
+                <Image
+                    src="/images/info1.jpg"
+                    alt="Info 1"
+                    width={500}
+                    height={300}
+                    className="w-full h-auto rounded-lg shadow-md object-cover"
+                />
+              </motion.div>
+              <div className="w-full md:w-1/2">
+                <h3 className="text-2xl font-bold mb-4 text-black">Наша місія</h3>
+                <p className="text-gray-600">
+                  Ми прагнемо надавати якісні товари та послуги, які роблять ваше
+                  життя кращим.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+                className="flex flex-col md:flex-row-reverse items-center gap-8"
+                {...variants.right}
+            >
+              <motion.div className="w-full md:w-1/2" {...imageAnimation}>
+                <Image
+                    src="/images/info2.jpg"
+                    alt="Info 2"
+                    width={500}
+                    height={300}
+                    className="w-full h-auto rounded-lg shadow-md object-cover"
+                />
+              </motion.div>
+              <div className="w-full md:w-1/2">
+                <h3 className="text-2xl font-bold mb-4 text-black">Наші цінності</h3>
+                <p className="text-gray-600">
+                  Чесність, якість і турбота про клієнтів — основа нашого бізнесу.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+                className="flex flex-col md:flex-row items-center gap-8"
+                {...variants.bottom}
+            >
+              <motion.div className="w-full md:w-1/2" {...imageAnimation}>
+                <Image
+                    src="/images/info3.webp"
+                    alt="Info 3"
+                    width={500}
+                    height={300}
+                    className="w-full h-auto rounded-lg shadow-md object-cover"
+                />
+              </motion.div>
+              <div className="w-full md:w-1/2">
+                <h3 className="text-2xl font-bold mb-4 text-black">Наша історія</h3>
+                <p className="text-gray-600">
+                  Засновані в 2020 році, ми швидко стали лідерами у своїй сфері.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <footer className="bg-gray-800 text-white py-8">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <p>© 2025 MAB Store. Всі права захищено.</p>
+          </div>
+        </footer>
+      </div>
   );
 }
